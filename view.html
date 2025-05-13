@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Voir viewBox, width et height</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #f0f0f0;
+    }
+    #dropZone {
+      width: 300px;
+      height: 150px;
+      border: 2px dashed #aaa;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      color: #555;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="dropZone">Glissez votre SVG ici</div>
+<p id="result"></p>
+
+<script>
+  const dropZone = document.getElementById('dropZone');
+  const result = document.getElementById('result');
+
+  dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#333';
+  });
+
+  dropZone.addEventListener('dragleave', e => {
+    dropZone.style.borderColor = '#aaa';
+  });
+
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.style.borderColor = '#aaa';
+
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const parser = new DOMParser();
+      const svgDoc = parser.parseFromString(event.target.result, "image/svg+xml");
+      const svgElement = svgDoc.querySelector('svg');
+
+      if (svgElement) {
+        const viewBox = svgElement.getAttribute('viewBox');
+        const width = svgElement.getAttribute('width');
+        const height = svgElement.getAttribute('height');
+
+        if (viewBox) {
+          result.innerHTML = `<b>viewBox</b> : ${viewBox}`;
+        } else if (width && height) {
+          result.innerHTML = `<b>Pas de viewBox</b><br>width : ${width}<br>height : ${height}`;
+        } else {
+          result.textContent = "Ni viewBox, ni width/height trouvés.";
+        }
+      } else {
+        result.textContent = "Pas de balise <svg> trouvée.";
+      }
+    };
+    reader.readAsText(file);
+  });
+</script>
+
+</body>
+</html>
