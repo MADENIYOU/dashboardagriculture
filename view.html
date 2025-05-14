@@ -1,81 +1,260 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Voir viewBox, width et height</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paysage Immersif Ultra Réaliste</title>
+  <script src="https://cdn.tailwindcss.com "></script>
   <style>
-    body {
-      font-family: sans-serif;
-      display: flex;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background: #f0f0f0;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      perspective: 1200px;
     }
-    #dropZone {
-      width: 300px;
-      height: 150px;
-      border: 2px dashed #aaa;
-      border-radius: 10px;
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      transform-style: preserve-3d;
+      overflow: hidden;
+    }
+
+    @keyframes cloudMove {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes grassSway {
+      0%, 100% { transform: rotate(-1deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    .sky {
+      background: linear-gradient(to bottom, #7ec6e9, #b7f0ff);
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 40%;
+      z-index: 0;
+    }
+
+    .cloud {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.9;
+      filter: blur(1px) drop-shadow(0 0 10px rgba(255,255,255,0.7));
+      background: radial-gradient(circle, #fff, #eee);
+      animation: cloudMove linear infinite;
+    }
+
+    .grass-field {
+      background: linear-gradient(to top, #4a7856, #88c9a1);
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 60%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .grass-blade {
+      position: absolute;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to top, #2d5a27, #8bc34a);
+      border-radius: 50% 50% 0 0;
+      transform-origin: bottom center;
+      animation: grassSway 4s ease-in-out infinite;
+      pointer-events: none;
+      transition: transform 0.6s ease;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+
+    .card-container {
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      bottom: 25%;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
-      background: white;
-      color: #555;
-      text-align: center;
-      padding: 10px;
+      z-index: 4;
+      pointer-events: none;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .card {
+      position: relative;
+      width: 250px;
+      height: 160px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      pointer-events: auto;
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .light-effect {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at top, rgba(255,255,255,0.15), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .shadow-effect {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 30px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, transparent 70%);
+      filter: blur(10px);
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .card-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 90%;
+      }
     }
   </style>
 </head>
-<body>
+<body class="overflow-hidden">
 
-<div id="dropZone">Glissez votre SVG ici</div>
-<p id="result"></p>
+<div class="scene">
+  <!-- Ciel -->
+  <div class="sky">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="cloud top-20 left-0 w-64 h-24" style="animation-duration: 120s;"></div>
+      <div class="cloud top-32 right-10 w-56 h-20" style="animation-duration: 150s; animation-delay: -30s;"></div>
+      <div class="cloud top-16 right-1/4 w-72 h-28" style="animation-duration: 180s; animation-delay: -60s;"></div>
+    </div>
+  </div>
+
+  <!-- Prairie étendue -->
+  <div class="grass-field">
+    <div id="globalGrassOverlay" class="absolute bottom-0 w-full h-full"></div>
+    <div class="shadow-effect"></div>
+  </div>
+
+  <!-- Cartes -->
+  <div class="card-container">
+    <div class="card">
+      <h2 class="text-lg font-bold text-gray-800 mb-1">Carte 1</h2>
+      <p class="text-sm text-gray-600">Passez la souris pour écarter les herbes</p>
+    </div>
+    <div class="card">
+      <h2 class="text-lg font-bold text-gray-800 mb-1">Carte 2</h2>
+      <p class="text-sm text-gray-600">Interagissez avec les deux</p>
+    </div>
+    <div class="card">
+      <h2 class="text-lg font-bold text-gray-800 mb-1">Carte 3</h2>
+      <p class="text-sm text-gray-600">Adaptation mobile prête</p>
+    </div>
+  </div>
+
+  <!-- Effet de lumière douce -->
+  <div class="light-effect"></div>
+</div>
 
 <script>
-  const dropZone = document.getElementById('dropZone');
-  const result = document.getElementById('result');
+  document.addEventListener("DOMContentLoaded", () => {
+    const grassOverlay = document.getElementById("globalGrassOverlay");
+    const cards = document.querySelectorAll(".card");
 
-  dropZone.addEventListener('dragover', e => {
-    e.preventDefault();
-    dropZone.style.borderColor = '#333';
-  });
+    // Dimensions
+    const width = window.innerWidth;
+    const grassHeight = window.innerHeight * 0.6;
 
-  dropZone.addEventListener('dragleave', e => {
-    dropZone.style.borderColor = '#aaa';
-  });
+    // Génération de 1500 herbes ultra-denses
+    for (let i = 0; i < 1500; i++) {
+      const blade = document.createElement("div");
+      blade.classList.add("grass-blade");
 
-  dropZone.addEventListener('drop', e => {
-    e.preventDefault();
-    dropZone.style.borderColor = '#aaa';
+      blade.style.left = `${Math.random() * width}px`;
+      blade.style.height = `${Math.random() * 200 + 150}px`; // Hauteur variable, touche les cartes
+      blade.style.width = `${2 + Math.random() * 2}px`;
+      blade.style.animationDuration = `${3 + Math.random() * 4}s`;
 
-    const file = e.dataTransfer.files[0];
-    if (!file) return;
+      const hue = 90 + Math.random() * 10;
+      blade.style.background = `linear-gradient(to top, hsl(${hue}, 50%, 25%), hsl(${hue}, 50%, 50%))`;
 
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      const parser = new DOMParser();
-      const svgDoc = parser.parseFromString(event.target.result, "image/svg+xml");
-      const svgElement = svgDoc.querySelector('svg');
+      grassOverlay.appendChild(blade);
+    }
 
-      if (svgElement) {
-        const viewBox = svgElement.getAttribute('viewBox');
-        const width = svgElement.getAttribute('width');
-        const height = svgElement.getAttribute('height');
+    // Suivre la souris pour courber les herbes autour
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener("mousemove", e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-        if (viewBox) {
-          result.innerHTML = `<b>viewBox</b> : ${viewBox}`;
-        } else if (width && height) {
-          result.innerHTML = `<b>Pas de viewBox</b><br>width : ${width}<br>height : ${height}`;
+    setInterval(() => {
+      const blades = grassOverlay.querySelectorAll(".grass-blade");
+      blades.forEach((blade) => {
+        const rect = blade.getBoundingClientRect();
+        const dx = rect.left - mouseX;
+        const dy = rect.top - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < 150) {
+          const angle = Math.atan2(dy, dx);
+          const force = 50;
+
+          blade.style.transform = `translate(${force * Math.cos(angle)}px, ${force * Math.sin(angle)}px) rotate(${angle}rad) scale(0.8)`;
         } else {
-          result.textContent = "Ni viewBox, ni width/height trouvés.";
+          blade.style.transform = "";
         }
-      } else {
-        result.textContent = "Pas de balise <svg> trouvée.";
+      });
+    }, 100);
+
+    // Fonction d'effet au survol des cartes
+    cards.forEach(card => {
+      function bendGrassAroundCard(bend) {
+        const rect = card.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const blades = grassOverlay.querySelectorAll(".grass-blade");
+
+        blades.forEach((blade) => {
+          const bladeRect = blade.getBoundingClientRect();
+
+          const dx = bladeRect.left - centerX;
+          const dy = bladeRect.top - centerY;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 250) {
+            const angle = Math.atan2(dy, dx);
+            const force = 80;
+
+            setTimeout(() => {
+              if (bend) {
+                blade.style.transform = `translate(${force * Math.cos(angle)}px, ${force * Math.sin(angle)}px) rotate(${angle}rad) scale(0.8)`;
+              } else {
+                blade.style.transform = "";
+              }
+            }, Math.random() * 100);
+          }
+        });
       }
-    };
-    reader.readAsText(file);
+
+      card.addEventListener("mouseenter", () => bendGrassAroundCard(true));
+      card.addEventListener("mouseleave", () => bendGrassAroundCard(false));
+    });
   });
 </script>
 

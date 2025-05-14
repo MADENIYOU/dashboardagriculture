@@ -62,7 +62,7 @@ const StyledWrapper = styled.div`
   .card {
     height: 100%;
     border-radius: 50px;
-    background: #654321;
+    background: #4CAF50;
     transition: all 0.5s ease-in-out;
     transform-style: preserve-3d;
     box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px, rgba(5, 71, 17, 0.2) 0px 25px 25px -5px;
@@ -130,14 +130,14 @@ const StyledWrapper = styled.div`
   .bottom .view-more .view-more-button {
     background: none;
     border: none;
-    color: #654321;
+    color: #4CAF50;
     font-weight: bolder;
     font-size: 12px;
   }
 
   .bottom .view-more .svg {
     fill: none;
-    stroke: #654321;
+    stroke: #4CAF50;
     stroke-width: 3px;
     max-height: 15px;
   }
@@ -174,11 +174,11 @@ const StyledWrapper = styled.div`
 
   .bottom .social-buttons-container .social-button .svg {
     width: 15px;
-    fill: #654321;
+    fill: #4CAF50;
   }
 
   .bottom .social-buttons-container .social-button:hover {
-    background: #654321;
+    background: #4CAF50;
   }
 
   .bottom .social-buttons-container .social-button:hover .svg {
