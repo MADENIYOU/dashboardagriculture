@@ -116,10 +116,10 @@ const speakWeatherInfo = (weatherData: any) => {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
 
-    const { regionName, temperature, description, windSpeed } = weatherData;
+    const { regionName, temperature, description, windSpeed, feelsLike } = weatherData;
     const textToSpeak = `
       Vous avez sélectionné ${regionName}. 
-      Il fait actuellement ${temperature} degrés Celsius. 
+      Il fait actuellement ${temperature} degrés, mais le ressenti est de ${feelsLike}. 
       Le temps est ${description}. 
       Le vent souffle à ${windSpeed} mètres par seconde.
     `;
@@ -139,10 +139,13 @@ const handleClick = (region: string) => {
   setClickedRegion(region);
   fetchWeatherByRegion(region);
   speakRegionName(region);
-  if (weatherData) {
-    speakWeatherInfo(weatherData);
-  }
 };
+
+useEffect(() => {
+    if (weatherData) {
+      speakWeatherInfo(weatherData);
+    }
+  }, [weatherData]);
   
   return (
     <div className="carte-senegal-container bg-gray-100 m-0 flex-[3] h-1">
