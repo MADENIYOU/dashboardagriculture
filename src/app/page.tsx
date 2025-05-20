@@ -159,17 +159,17 @@ export default function Home() {
           <CarteSenegal />
         </motion.div>
 
-        <motion.div
+        {/* <motion.div
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="border-l border-gray-300 bg-white ml-4 mt-3.5"
         >
           <ChatAgricole />
-        </motion.div>
+        </motion.div> */}
       </div>
       <br></br>
-      <PrairieSection />
+      {/* <PrairieSection /> */}
     </main>
   );
 }

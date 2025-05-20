@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface WeatherData {
+  regionName: String;
   temperature: number;
   feelsLike: number;
   humidity: number;
@@ -31,6 +32,16 @@ const degToCardinal = (deg: number): string => {
 const WeatherCardGrid: React.FC<WeatherCardGridProps> = ({ regionName, weatherData }) => {
   return (
     <div className="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto p-3 custom-scrollbar bg-gray-200">
+      <Card className="bg-gradient-to-l from-yellow-500 to-orange-300">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-">
+          <CardTitle className="text-sm font-medium">Région :</CardTitle>
+          
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">{regionName}</div>
+        </CardContent>
+      </Card>
+      
       <Card className="bg-gradient-to-r from-blue-300 via-white to-orange-300">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Actuellement</CardTitle>
