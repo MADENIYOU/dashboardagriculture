@@ -22,7 +22,7 @@ const PrairieSection = () => {
       ref={ref}
       style={{
         backgroundImage: 'linear-gradient(to bottom, #b8f2e6, #a6dcef)',
-        transform: y as any, // On applique la transformation ici
+        transform: y as any,
         transition: 'transform 0.1s ease-out',
         minHeight: '600px',
         position: 'relative',
@@ -154,9 +154,6 @@ export default function Home() {
       {/* Zone haute avec CarteSenegal et ChatAgricole */}
       <div className="flex w-full max-w-[1800px] h-[90vh] mb-8">
         <motion.div
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
           className="flex h-screen justify-end"
         >
           <CarteSenegal />
@@ -171,8 +168,7 @@ export default function Home() {
           <ChatAgricole />
         </motion.div>
       </div>
-
-      {/* Section Prairie avec cartes */}
+      <br></br>
       <PrairieSection />
     </main>
   );
