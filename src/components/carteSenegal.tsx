@@ -103,49 +103,89 @@ const CarteSenegal: React.FC = () => {
     }
   };
 
+  
+  const getMaleVoice = () => {
+    if (typeof window === 'undefined') return null;
+
+    const voices = window.speechSynthesis.getVoices();
+
+    const maleVoice = voices.find(
+      voice =>
+        voice.lang.startsWith('fr-FR') &&
+        ( voice.name.toLowerCase().includes('male') ||
+          voice.name.toLowerCase().includes('matthieu') ||
+          voice.name.toLowerCase().includes('pierre'))
+    );
+
+    return maleVoice || voices.find(voice => voice.lang.startsWith('fr-FR'));
+  };
+
+  
   const speakRegionName = (regionName: string) => {
-  if ('speechSynthesis' in window) {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(regionName);
     utterance.lang = 'fr-FR';
-    window.speechSynthesis.speak(utterance);
-  }
-};
 
-const speakWeatherInfo = (weatherData: any) => {
-  if ('speechSynthesis' in window) {
+    const maleVoice = getMaleVoice();
+    if (maleVoice) {
+      utterance.voice = maleVoice;
+    }
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  
+  const speakWeatherInfo = (weatherData: any) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
     window.speechSynthesis.cancel();
 
     const { regionName, temperature, description, windSpeed, feelsLike } = weatherData;
     const textToSpeak = `
       Vous avez sélectionné ${regionName}. 
-      Il fait actuellement ${temperature} degrés, mais le ressenti est de ${feelsLike}. 
+      Il fait actuellement ${temperature} degrés, mais le ressenti est de ${feelsLike}.  
       Le temps est ${description}. 
       Le vent souffle à ${windSpeed} mètres par seconde.
     `;
 
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     utterance.lang = 'fr-FR';
-    utterance.rate = 0.9;     
-    utterance.pitch = 1.1;   
+    utterance.rate = 0.9;
+    utterance.pitch = 1.1;
+
+    const maleVoice = getMaleVoice();
+    if (maleVoice) {
+      utterance.voice = maleVoice;
+    }
 
     window.speechSynthesis.speak(utterance);
-  } else {
-    console.warn('La synthèse vocale n\'est pas supportée par ce navigateur.');
-  }
-};
+  };
+  
 
-const handleClick = (region: string) => {
-  setClickedRegion(region);
-  fetchWeatherByRegion(region);
-  speakRegionName(region);
-};
-
-useEffect(() => {
+  useEffect(() => {
     if (weatherData) {
       speakWeatherInfo(weatherData);
     }
   }, [weatherData]);
+
+  
+  useEffect(() => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        console.log("Voix chargées");
+      };
+    }
+  }, []);
+
+  
+  const handleClick = (region: string) => {
+    setClickedRegion(region);
+    fetchWeatherByRegion(region);
+    speakRegionName(region);
+  };
+
   
   return (
     <div className="carte-senegal-container bg-gray-100 m-0 flex-[3] h-1">
