@@ -1,0 +1,20 @@
+.land {
+                    fill: #4CAF50;
+                    stroke: white;
+                    stroke-width: 0.5;
+                    transition: fill 0.3s ease;
+                  }
+                  .land:hover {
+                    fill: yellow;
+                    cursor: pointer;
+                  }
+                  .land:active {
+                    fill: red;
+                    cursor: pointer;
+                  }
+                  .region-name {
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-anchor: middle;
+                    fill: black;
+                  }

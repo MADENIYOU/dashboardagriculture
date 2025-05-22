@@ -12,17 +12,15 @@ export default function Home() {
 
   const [category, setCategory] = useState("All");
   return (
-    <main className="flex flex-col items-center justify-start h-full w-full bg-gray-100 overflow-auto">
+    <main className="flex flex-col items-center justify-start h-full w-full bg-gray-200 overflow-auto">
       {/* Zone haute avec CarteSenegal et ChatAgricole */}
-      <div className="flex w-full max-w-[1800px] h-[90vh] mb-8">
-        <motion.div
-          className="flex h-screen justify-end"
-        >
+      <div className="flex w-full justify-center mt-10">
+        <div className="w-full max-w-[1200px] h-[80vh] overflow-auto border-gray-300 rounded-lg shadow-lg bg-gray-200">
           <CarteSenegal />
-        </motion.div>
+        </div>
       </div>
       <br></br>
-      <motion.div className='w-2/3 left-0'>
+      <motion.div className='w-2/3 ml-0 mr-auto'>
         <ExploreCarte category={category} setCategory={setCategory}/>
         <CultureDisplay category={category} setCategory={setCategory}/>
       </motion.div>

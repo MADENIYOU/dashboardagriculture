@@ -57,11 +57,9 @@ const ExploreCarte = ({ category, setCategory }) => {
 
   return (
     <div className="explore-carte" id="explore-carte">
-      <h1>My Country, My Diversity</h1>
+      <h1>Diversité agricole du pays</h1>
       <p className="explore-carte-text">
-        Choose from a diverse array of cultural regions that showcase the
-        unique traditions, cuisine, and heritage. Our mission is to promote
-        understanding and appreciation of our country's rich diversity.
+        Choisissez parmi une grande variété de cultures afin de découvrir la richesse, la diversité et l'originalité de la culture sénégalaise.
       </p>
       
       <div className="explore-carte-list">
