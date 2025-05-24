@@ -142,12 +142,13 @@ const CarteSenegal: React.FC = () => {
 
     window.speechSynthesis.cancel();
 
-    const { regionName, temperature, description, windSpeed, feelsLike } = weatherData;
+    const { regionName, temperature, description, windSpeed, feelsLike, clouds } = weatherData;
     const textToSpeak = `
       Vous avez sélectionné ${regionName}. 
       Il fait actuellement ${temperature} degrés, mais le ressenti est de ${feelsLike}.  
       Le temps est ${description}. 
       Le vent souffle à ${windSpeed} mètres par seconde.
+      Le tauc de présence des nuages est de ${clouds} %.
     `;
 
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
