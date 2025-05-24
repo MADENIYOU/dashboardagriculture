@@ -2,6 +2,7 @@
 
 "use client";
 import axios from "axios";
+import translate from 'translate';
 import React, { useEffect, useState } from "react";
 import WeatherCardGrid from "./WeatherCardGrid";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -137,16 +138,25 @@ const CarteSenegal: React.FC = () => {
   };
 
   
-  const speakWeatherInfo = (weatherData: any) => {
+  const speakWeatherInfo = async (weatherData: any) => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
 
     window.speechSynthesis.cancel();
 
     const { regionName, temperature, description, windSpeed, feelsLike, clouds } = weatherData;
+    let translatedDescription = description; 
+
+    try {
+      const result = await translate(description, { from: 'en', to: 'fr' });
+      translatedDescription = result;
+    } catch (error) {
+      console.error("Erreur lors de la traduction :", error);
+    }
+    
     const textToSpeak = `
       Vous avez sélectionné ${regionName}. 
       Il fait actuellement ${temperature} degrés, mais le ressenti est de ${feelsLike}.  
-      Le temps est ${description}. 
+      Le temps est ${translatedDescription}. 
       Le vent souffle à ${windSpeed} mètres par seconde.
       Le tauc de présence des nuages est de ${clouds} %.
     `;
