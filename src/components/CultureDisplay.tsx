@@ -1,6 +1,6 @@
-// @ts-nocheck
+//@ts-nocheck
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./CultureDisplay.css";
 import CultureItem from "@/components/CultureItem/CultureItem";
 import { cultureDisplay_list } from "../../public/assets/assets.js";
@@ -12,18 +12,23 @@ const getRandomItems = (array, count) => {
 };
 
 const CultureDisplay = ({ category }) => {
-  const filteredList =
-    category === "All"
-      ? cultureDisplay_list
-      : cultureDisplay_list.filter((item) => item.type === category);
-  
-  const randomItems = getRandomItems(filteredList, 10);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const filteredList =
+      category === "All"
+        ? cultureDisplay_list
+        : cultureDisplay_list.filter((item) => item.type === category);
+
+    const randomItems = getRandomItems(filteredList, 12);
+    setItems(randomItems);
+  }, [category]);
 
   return (
     <div className="culture-display">
       <h1 className="culture-heading">Top cultures près de chez vous</h1>
       <div className="culture-grid">
-        {randomItems.map((item) => (
+        {items.map((item) => (
           <CultureItem
             key={item.culture_id}
             image={item.image}

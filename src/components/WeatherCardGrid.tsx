@@ -33,7 +33,7 @@ const degToCardinal = (deg: number): string => {
 
 const WeatherCardGrid: React.FC<WeatherCardGridProps> = ({ regionName, weatherData }) => {
   return (
-    <div className="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto p-3 custom-scrollbar bg-gray-200">
+    <div className="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto p-3 custom-scrollbar bg-gray-400">
       <Card className="bg-gradient-to-l from-yellow-500 to-orange-300">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-">
           <CardTitle className="text-sm font-medium">Région :</CardTitle>

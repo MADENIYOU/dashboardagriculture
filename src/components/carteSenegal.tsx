@@ -156,7 +156,7 @@ const CarteSenegal: React.FC = () => {
     const textToSpeak = `
       Vous avez sélectionné ${regionName}. 
       Il fait actuellement ${temperature} degrés, mais le ressenti est de ${feelsLike}.  
-      Le temps est ${translatedDescription}. 
+      Nous avons un ${translatedDescription}. 
       Le vent souffle à ${windSpeed} mètres par seconde.
       Le tauc de présence des nuages est de ${clouds} %.
     `;
@@ -199,7 +199,7 @@ const CarteSenegal: React.FC = () => {
 
   
   return (
-    <div className="carte-senegal-container bg-gray-200 m-0 w-full flex flex-col">
+    <div className="carte-senegal-container bg-gray-400 m-0 w-full flex flex-col">
       {weatherData && (
         <div className="w-[1200px] flex justify-center p-4">
           <WeatherCardGrid regionName={regionName} weatherData={weatherData} />
@@ -207,14 +207,14 @@ const CarteSenegal: React.FC = () => {
       )};
 
       
-      <div className="flex-grow w-[1200px] flex items-center h-screen justify-center overflow-auto bg-gray-200 rounded-lg shadow-inner">
+      <div className="flex-grow w-[1200px] flex items-center h-screen justify-center overflow-auto bg-gray-400 rounded-lg shadow-inner">
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
           version="1.1"
           viewBox="-60 355 788 609"
-          className="carte-senegal rounded-2xl max-w-full max-h-full bg-gray-200"
+          className="carte-senegal rounded-2xl max-w-full max-h-full bg-gray-400"
         >
           <defs>
             <style type="text/css">
