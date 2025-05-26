@@ -33,6 +33,7 @@ const CultureItem = ({
             description,
             type
           })}
+          // Implémenter l'écriture en latex ou en PDF classique, à travers les graphes et comparaisons publiques implémentées par C. Fall
         >
             <svg
               xmlns="http://www.w3.org/2000/svg"

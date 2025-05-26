@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import CarteSenegal from "@/components/carteSenegal";
 import ExploreCarte from '@/components/ExploreCarte';
 import CultureDisplay from '@/components/CultureDisplay';
+import Card from '@/components/post';
 
 
 export default function Home() {
@@ -36,23 +37,44 @@ export default function Home() {
           background: rgba(0, 0, 0, 0.05);
         }
       `}</style>
-      <div className="flex w-full justify-center mt-10">
+      <div className="flex w-full justify-center mt-10 px-4">
         <div
           className="w-full max-w-[1200px] h-[80vh] overflow-auto border-gray-300 rounded-lg shadow-lg bg-gray-400 scrollbar-transparent"
           style={{
-            scrollbarWidth: 'auto', // Firefox
-            scrollbarColor: 'transparent transparent', // Firefox
-            msOverflowStyle: 'none', // IE 11
           }}
         >
           <CarteSenegal />
         </div>
       </div>
       <br></br>
-      <motion.div className='w-2/3 ml-0 mr-auto'>
-        <ExploreCarte category={category} setCategory={setCategory}/>
-        <CultureDisplay category={category} setCategory={setCategory}/>
-      </motion.div>
+      <motion.section 
+        className="flex flex-col md:flex-row w-full px-4 gap-6"
+        style={{
+          backgroundImage: "url('/images/5689adead0c40fd36a62bcf90a4773dd.webp')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}>
+        <motion.div className="md:w-2/3 w-full ml-0 mr-auto">
+          <ExploreCarte category={category} setCategory={setCategory} />
+          <CultureDisplay category={category} setCategory={setCategory} />
+        </motion.div>
+        
+        <motion.div className="md:w-1/3 w-full ml-0 mr-auto mt-0 pt-0 flex flex-col">
+          <div className="h-auto md:h-[535px] flex items-center mb-4 justify-center">
+            <motion.h1 className="text-xl sm:text-2xl text-[#222] font-bold mb-4 text-center">
+              Quelques forums publics
+            </motion.h1>
+          </div>
+          
+          <div className="space-y-4">
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+          </div>
+        </motion.div>
+      </motion.section>
     </main>
   );
 }
