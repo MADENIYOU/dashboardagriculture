@@ -53,6 +53,39 @@ export default function ActusBubbles() {
         </div>
       )}
 
+      {!loading && totalPages > 1 && (
+        <div className="flex justify-center items-center mt-10 space-x-6">
+          <button
+            onClick={handlePrev}
+            disabled={currentPage === 1}
+            className={`flex items-center px-5 py-2 rounded-lg transition-all ${
+              currentPage === 1
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-green-600 text-white hover:bg-green-700'
+            }`}
+          >
+            <FaArrowLeft className="mr-2" /> Précédent
+          </button>
+
+          <span className="text-sm text-gray-600 font-medium">
+            Page <strong className="text-green-700">{currentPage}</strong> sur{' '}
+            <strong className="text-green-700">{totalPages}</strong>
+          </span>
+
+          <button
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+            className={`flex items-center px-5 py-2 rounded-lg transition-all ${
+              currentPage === totalPages
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-green-600 text-white hover:bg-green-700'
+            }`}
+          >
+            Suivant <FaArrowRight className="ml-2" />
+          </button>
+        </div>
+      )}
+
       {/* Grille d'articles avec animations */}
       {!loading && (
         <AnimatePresence mode="wait" initial={false}>
