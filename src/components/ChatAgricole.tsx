@@ -119,7 +119,7 @@ const ChatAgricole = () => {
                     : 'bg-gray-700 text-white'
                 }`}
               >
-                <p className="text-sm">{msg.content}</p>
+                <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
               </div>
             </div>
           ))}
