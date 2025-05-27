@@ -1,6 +1,6 @@
 import React from "react";
 import "./CultureItem.css";
-import { generateCultureFicheTxt } from "./../TheFiles";
+import { generateCultureFicheTxt, generateCultureFichePDF } from "./../TheFiles";
 
 const CultureItem = ({
   image,
@@ -23,7 +23,7 @@ const CultureItem = ({
         <button
           className="culture-button download"
           title={`Télécharger les infos de ${nom_culture}`}
-          onClick={() => generateCultureFicheTxt({
+          onClick={() => generateCultureFichePDF({
             nom_culture,
             region,
             saison,

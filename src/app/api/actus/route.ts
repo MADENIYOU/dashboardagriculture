@@ -36,8 +36,6 @@ export async function GET() {
       }
     });
 
-    console.log(articles);
-
     return NextResponse.json(articles);
   } catch (error) {
     return NextResponse.json({ error: 'Erreur interne', details: String(error) }, { status: 500 });
