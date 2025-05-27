@@ -137,7 +137,7 @@ const ChatAgricole = () => {
         </div>
 
         {/* Input */}
-        <div className="p-4 bg-gray-800 border-t border-gray-700 sticky bottom-16">
+        <div className="p-4 bg-gray-800 border-t border-gray-700">
           <div className="relative">
             <textarea
               value={input}
