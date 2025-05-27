@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Card = () => {
+const Post = () => {
     return (
     <StyledWrapper className='ml-30'>
         <div className="card">
@@ -109,4 +109,4 @@ const StyledWrapper = styled.div`
   }
 `;
 
-export default Card;
+export default Post;

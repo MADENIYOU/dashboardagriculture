@@ -6,7 +6,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import CarteSenegal from "@/components/carteSenegal";
 import ExploreCarte from '@/components/ExploreCarte';
 import CultureDisplay from '@/components/CultureDisplay';
-import Card from '@/components/post';
+import Post from '@/components/post';
+import ActusBubbles from '@/components/ActusBulles';
 
 
 export default function Home() {
@@ -50,9 +51,7 @@ export default function Home() {
       <motion.section 
         className="flex flex-col md:flex-row w-full px-4 gap-6"
         style={{
-          backgroundImage: "url('/images/5689adead0c40fd36a62bcf90a4773dd.webp')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          
         }}>
         <motion.div className="md:w-2/3 w-full ml-0 mr-auto">
           <ExploreCarte category={category} setCategory={setCategory} />
@@ -67,13 +66,25 @@ export default function Home() {
           </div>
           
           <div className="space-y-4">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
           </div>
         </motion.div>
+      </motion.section>
+
+      <motion.section>
+        <motion.div className="">
+          <div className="h-auto flex items-center mb-4 justify-center">
+            <motion.h1 className="text-xl sm:text-2xl text-[#222] font-bold mb-4 text-center">
+              Actualités
+            </motion.h1>
+          </div>
+        </motion.div>
+        <ActusBubbles />
       </motion.section>
     </main>
   );
