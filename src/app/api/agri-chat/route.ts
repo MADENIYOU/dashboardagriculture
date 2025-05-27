@@ -46,7 +46,7 @@ Question : "${lastUserMessage}"
       return NextResponse.json({
         choices: [{
           message: {
-            content: "Je suis spécialisé dans les questions liées à l'agriculture sénégalaise. Je ne peux pas répondre à ce sujet."
+            content: "Je suis désolé mais je ne suis spécialisé que dans les questions liées à l'agriculture sénégalaise. Je ne peux pas répondre à ce sujet ; mais je serais ravi de t'aider sur le domaine de l'agriculture"
           }
         }]
       });
