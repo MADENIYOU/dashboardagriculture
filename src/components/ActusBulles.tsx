@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaArrowLeft, FaArrowRight, FaSpinner } from 'react-icons/fa'
 
-const POSTS_PER_PAGE = 30
+const POSTS_PER_PAGE = 12
 
 export default function ActusBubbles() {
   const [articles, setArticles] = useState<any[]>([])
@@ -104,7 +104,7 @@ export default function ActusBubbles() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
-                className="p-5 bg-green-50 rounded-xl w-72 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all border border-green-100"
+                className="p-5 bg-green-50 rounded-xl w-60 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all border border-green-100"
               >
                 {a.image && (
                   <img

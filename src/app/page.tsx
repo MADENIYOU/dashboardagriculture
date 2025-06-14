@@ -55,7 +55,8 @@ export default function Home() {
         }}>
         <motion.div className="md:w-2/3 w-full ml-0 mr-auto">
           <ExploreCarte category={category} setCategory={setCategory} />
-          <CultureDisplay category={category} setCategory={setCategory} />
+        <ActusBubbles />
+          {/* <CultureDisplay category={category} setCategory={setCategory} /> */}
         </motion.div>
         
         <motion.div className="md:w-1/3 w-full ml-0 mr-auto mt-0 pt-0 flex flex-col">
@@ -71,12 +72,11 @@ export default function Home() {
             <Post />
             <Post />
             <Post />
-            <Post />
           </div>
         </motion.div>
       </motion.section>
 
-      <motion.section>
+      {/* <motion.section>
         <motion.div className="">
           <div className="h-auto flex items-center mb-4 justify-center">
             <motion.h1 className="text-xl sm:text-2xl text-[#222] font-bold mb-4 text-center">
@@ -84,8 +84,7 @@ export default function Home() {
             </motion.h1>
           </div>
         </motion.div>
-        <ActusBubbles />
-      </motion.section>
+      </motion.section> */}
     </main>
   );
 }

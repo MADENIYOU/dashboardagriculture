@@ -25,18 +25,18 @@ export async function POST(request: Request) {
     const lastUserMessage = messages.findLast((msg: any) => msg.role === 'user')?.content || '';
     
     const topicPrompt = `
-Tu es un expert agricole sénégalais. Analyse la question suivante et réponds uniquement par "agriculture" si elle concerne :
-- Les cultures, sols, variétés locales, techniques agricoles, climat agricole, marchés agricoles, ou tout sujet lié à l'agriculture au Sénégal.
-Sinon, réponds uniquement par "autre".
+      Tu es un expert agricole sénégalais. Analyse la question suivante et réponds uniquement par "agriculture" si elle concerne :
+      - Les cultures, sols, variétés locales, techniques agricoles, climat agricole, marchés agricoles, ou tout sujet lié à l'agriculture au Sénégal.
+      Sinon, réponds uniquement par "autre".
 
-Question : "${lastUserMessage}"
-`;
+      Question : "${lastUserMessage}"
+    `;
 
     const topicCheckResponse = await axios.post(
       `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`,
       {
         contents: [{ parts: [{ text: topicPrompt }] }],
-        generationConfig: { temperature: 0, maxOutputTokens: 20 },
+        generationConfig: { temperature: 0, maxOutputTokens: 2048 },
       }
     );
 
